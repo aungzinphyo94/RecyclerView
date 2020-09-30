@@ -11,12 +11,31 @@ import kotlinx.android.synthetic.main.item_flower.view.*
 class FlowerAdapter(var flowerList: ArrayList<Flower>) :
     RecyclerView.Adapter<FlowerAdapter.FlowerViewHolder>(){
 
-    class FlowerViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    var clickListener: ClickListener? = null
+
+    inner class FlowerViewHolder(itemView: View):
+        RecyclerView.ViewHolder(itemView), View.OnClickListener {
+
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+        lateinit var flower: Flower
+
         fun bind(flower: Flower) {
+            this.flower = flower
             itemView.txtName.text = flower.name
             itemView.txtPrice.text = flower.price.toString()
             itemView.imgFlower.setImageResource(flower.image)
         }
+
+        override fun onClick(view: View?) {
+            clickListener?.onClick(flower)
+        }
+    }
+
+    fun setOnClickListener(clickListener: ClickListener) {
+        this.clickListener = clickListener
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FlowerViewHolder {
@@ -33,5 +52,8 @@ class FlowerAdapter(var flowerList: ArrayList<Flower>) :
 
     }
 
+    interface ClickListener {
+        fun onClick(flower: Flower)
+    }
 
 }
