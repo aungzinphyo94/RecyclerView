@@ -18,5 +18,10 @@
         android:id="@+id/detailsFragment"
         android:name="com.myanmaritc.recyclerview.fragment.DetailsFragment"
         android:label="fragment_details"
-        tools:layout="@layout/fragment_details" />
+        tools:layout="@layout/fragment_details" >
+        <argument
+            android:name="name"
+            app:argType="string"
+            android:defaultValue="default" />
+    </fragment>
 </navigation>

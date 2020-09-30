@@ -46,6 +46,11 @@ class FlowerFragment : Fragment(), FlowerAdapter.ClickListener {
     }
 
     override fun onClick(flower: Flower) {
-        findNavController().navigate(R.id.action_flowerFragment_to_detailsFragment)
+//        findNavController().navigate(R.id.action_flowerFragment_to_detailsFragment)
+        var flowerName = flower.name
+        var action = FlowerFragmentDirections.actionFlowerFragmentToDetailsFragment(flowerName)
+
+        findNavController().navigate(action)
     }
+
 }
